@@ -10,7 +10,7 @@ I wanted to create a streaming service, similar to netflix or hulu, where users 
 
 ### UML
 
-![UML](./assets/Stellar-uml.png)
+![UML](./assets/Stellar-uml-1.png)
 
 #### Setting up
 
