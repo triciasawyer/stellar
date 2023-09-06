@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
-// import './movie.css';
+import './movie.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Movie = () => {
