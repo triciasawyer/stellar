@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Header from './Components/Header/header';
+// import Home from './Components/Home/home';
+// import Series from './Components/Series/series';
+import Movie from './Components/Movie/movie';
+// import Kids from './Components/Kids/kids';
+// import MovieDetail from './Components/movie-detail';
 
 function App() {
+  const [searchQuery, setSearchQuery] = useState('');
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <Header searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+        <Routes>
+          {/* <Route path="/" element={<Home />} /> */}
+          {/* <Route path="/movies/:id" element={<MovieDetail />} /> */}
+          {/* <Route path="/series" element={<Series />} /> */}
+          <Route path="/movies" element={<Movie />} />
+          {/* <Route path="/kids" element={<Kids />} /> */}
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
