@@ -1,39 +1,36 @@
-// import React, { useState, useEffect } from 'react';
-// import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import MovieRow from './movieRow';
+import axios from 'axios';
 
-// const Home = () => {
-//     const [movies, setMovies] = useState([]);
+const Home = () => {
+  const [popularMovies, setPopularMovies] = useState([]);
+  const [popularTVShows, setPopularTVShows] = useState([]);
 
-//     useEffect(() => {
-//         fetchMovies();
-//     }, []);
+  // Fetch data for popular movies and TV shows
+  useEffect(() => {
+    async function fetchPopularData() {
+      try {
+        // Fetching popular movies
+        const moviesResponse = await axios.get('/popular-movies');
+        setPopularMovies(moviesResponse.data);
 
-//     const fetchMovies = async () => {
-//         try {
-//             console.log('Fetching movies...');
-//             const response = await axios.get('http://localhost:3002/movies');
-//             console.log('Fetched movies:', response.data);
-//             setMovies(response.data);
-//         } catch (err) {
-//             console.error('Error fetching movies:', err);
-//         }
-//     };
+        // Fetching popular series
+        const tvShowsResponse = await axios.get('/popular-series');
+        setPopularTVShows(tvShowsResponse.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    }
 
-//     return (
-//         <>
-//             <h2>Featured Movies</h2>
-//             <div className="movie-li">
-//                 {movies.map((movie, index) => (
-//                     <div key={index} className='movie'>
-//                         <img src={movie.imageUrl} alt={movie.title} />
-//                         <h3>{movie.title}</h3>
-//                         <p>{movie.overview}</p>
-//                         <p>Released: {movie.releasedOn}</p>
-//                     </div>
-//                 ))}
-//             </div>
-//         </>
-//     )
-// }
+    fetchPopularData();
+  }, []);
 
-// export default Home;
+  return (
+    <div className="home">
+      <MovieRow title="Popular Movies" movies={popularMovies} />
+      <MovieRow title="Popular TV Shows" movies={popularTVShows} />
+    </div>
+  );
+};
+
+export default Home;
