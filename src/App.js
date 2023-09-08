@@ -5,7 +5,6 @@ import Home from './Components/Home/home';
 import Series from './Components/Series/series';
 import Movie from './Components/Movie/movie';
 import Kids from './Components/Kids/kids';
-// import MovieDetail from './Components/movie-detail';
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -16,7 +15,6 @@ function App() {
         <Header searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
         <Routes>
           <Route path="/" element={<Home />} />
-          {/* <Route path="/movies/:id" element={<MovieDetail />} /> */}
           <Route path="/series" element={<Series />} />
           <Route path="/movies" element={<Movie />} />
           <Route path="/kids" element={<Kids />} />
