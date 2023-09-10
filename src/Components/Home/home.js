@@ -3,15 +3,15 @@ import axios from 'axios';
 // import './home.css';
 
 const Home = () => {
-  const [popularMovies, setPopularMovies] = useState([]);
+  const [recMovies, setRecMovies] = useState([]);
   const [series, setSeries] = useState([]);
 
   useEffect(() => {
     async function fetchPopularData() {
       try {
         // Fetch movies
-        const popularMovieRes = await axios.get('http://localhost:3002/movies?category=popular');
-        setPopularMovies(popularMovieRes.data);
+        const recentMovieRes = await axios.get('http://localhost:3002/movies?category=popular');
+        setRecMovies(recentMovieRes.data);
 
         // Fetch TV series
         const seriesResponse = await axios.get('http://localhost:3002/series');
@@ -26,11 +26,11 @@ const Home = () => {
 
   return (
     <div className="home">
-      <section className="popular-movies-section">
+      <section className="recent-movies-section">
         <div className="container">
-          <h2>Popular Movies</h2>
+          <h2>New Movies</h2>
           <div className="row flex-nowrap overflow-auto">
-            {popularMovies.map((movie, index) => (
+            {recMovies.map((movie, index) => (
               <div key={index} className='col-md-2 mb-4'>
                 <div className='card' style={{ width: '100%' }}>
                   <img
