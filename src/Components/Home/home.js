@@ -24,11 +24,21 @@ const Home = () => {
     fetchPopularData();
   }, []);
 
+  function formatReleaseDate(releaseDate) {
+    if (!releaseDate) return "N/A";
+  
+    const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+    const formattedDate = new Date(releaseDate).toLocaleDateString(undefined, options);
+    
+    const [month, day, year] = formattedDate.split('/');
+    return `${month}-${day}-${year}`;
+  }
+
   return (
     <div className="home">
       <section className="recent-movies-section">
         <div className="container">
-          <h2>New Movies</h2>
+          <h2 style={{ fontSize: '25px' }}>New Movies</h2>
           <div className="row flex-nowrap overflow-auto">
             {recMovies.map((movie, index) => (
               <div key={index} className='col-md-2 mb-4'>
@@ -43,7 +53,7 @@ const Home = () => {
                     <div className="card-text-scrollable">
                       <p className="card-text">{movie.overview}</p>
                     </div>
-                    <p className="card-text">Released: {movie.releasedOn}</p>
+                    <p className="card-text">{formatReleaseDate(movie.releasedOn)}</p>
                   </div>
                 </div>
               </div>
@@ -54,7 +64,7 @@ const Home = () => {
 
       <section className="series-section">
         <div className="container">
-          <h2>TV Shows</h2>
+          <h2 style={{ fontSize: '25px' }}>TV Shows</h2>
           <div className="row flex-nowrap overflow-auto">
             {series.map((series, index) => (
               <div key={index} className='col-md-2 mb-4'>
@@ -69,7 +79,7 @@ const Home = () => {
                     <div className="card-text-scrollable">
                       <p className="card-text">{series.overview}</p>
                     </div>
-                    <p className="card-text">Released: {series.releasedOn}</p>
+                    <p className="card-text">{formatReleaseDate(series.releasedOn)}</p>
                   </div>
                 </div>
               </div>
