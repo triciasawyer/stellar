@@ -9,15 +9,15 @@ const Movie = () => {
 
     const fetchMovies = useCallback(async () => {
         try {
-            console.log('Fetching movies...');
+            // console.log('Fetching movies...');
             let url = 'http://localhost:3002/movies';
             if (searchQuery) {
                 url += `?searchQuery=${searchQuery}`;
             }
             const response = await axios.get(url);
-            console.log('Fetched movies:', response.data);
+            // console.log('Fetched movies:', response.data);
             setMovies(response.data);
-            console.log('Updated movies:', response.data);
+            // console.log('Updated movies:', response.data);
         } catch (err) {
             console.error('Error fetching movies:', err);
         }
@@ -56,7 +56,7 @@ const Movie = () => {
                                 <div className='card-details'>
                                     <h5 className="card-title">{movie.title}</h5>
                                     <div className="card-text-scrollable">
-                                        <p className="card-text">{movie.overview}</p>
+                                        {/* <p className="card-text">{movie.overview}</p> */}
                                     </div>
                                     <p className="card-text">Released: {movie.releasedOn}</p>
                                 </div>
