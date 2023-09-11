@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
-// import './home.css';
 
 const Home = () => {
   const [recMovies, setRecMovies] = useState([]);
@@ -10,7 +10,7 @@ const Home = () => {
   const [actors, setActors] = useState([]);
 
   useEffect(() => {
-    async function fetchPopularData() {
+    async function fetchData() {
       try {
         // Fetching
         const recentMovieRes = await axios.get('http://localhost:3002/movies?category=playing');
@@ -32,7 +32,7 @@ const Home = () => {
       }
     }
 
-    fetchPopularData();
+    fetchData();
   }, []);
 
   function formatReleaseDate(releaseDate) {
@@ -177,20 +177,22 @@ const Home = () => {
           <div className="row flex-nowrap overflow-auto">
             {actors.map((actor, index) => (
               <div key={index} className='col-md-2 mb-4'>
-                <div className='card' style={{ width: '100%' }}>
-                  {actor.profileImageUrl ? (
-                    <img
-                      className="card-img-top"
-                      src={actor.profileImageUrl}
-                      alt={actor.name}
-                    />
-                  ) : (
-                    <div className="placeholder-image">No Image Available</div>
-                  )}
-                  <div className='card-details'>
-                    <h5 className="card-title">{actor.name}</h5>
+                <Link to={`/actor/${actor.id}`} className="actor-link">
+                  <div className='card' style={{ width: '100%' }}>
+                    {actor.profileImageUrl ? (
+                      <img
+                        className="card-img-top"
+                        src={actor.profileImageUrl}
+                        alt={actor.name}
+                      />
+                    ) : (
+                      <div className="placeholder-image">No Image Available</div>
+                    )}
+                    <div className='card-details'>
+                      <h5 className="card-title">{actor.name}</h5>
+                    </div>
                   </div>
-                </div>
+                </Link>
               </div>
             ))}
           </div>
