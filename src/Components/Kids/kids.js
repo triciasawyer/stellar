@@ -32,7 +32,7 @@ const Kids = () => {
             <div className="search-bar d-flex justify-content-center mb-3">
                 <input
                     type="text"
-                    placeholder="Search movies..."
+                    placeholder="Search kids..."
                     className="search-input"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
