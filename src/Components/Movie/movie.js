@@ -55,9 +55,6 @@ const Movie = () => {
                                 </div>
                                 <div className='card-details'>
                                     <h5 className="card-title">{movie.title}</h5>
-                                    <div className="card-text-scrollable">
-                                        {/* <p className="card-text">{movie.overview}</p> */}
-                                    </div>
                                     <p className="card-text">Released: {movie.releasedOn}</p>
                                 </div>
                             </div>
