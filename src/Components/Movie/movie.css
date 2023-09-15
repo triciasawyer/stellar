@@ -38,10 +38,6 @@
     transition: transform 0.3s ease-in-out;
   }
   
-  /* .card:hover .card-details {
-    transform: translateY(0);
-  } */
-  
   .card-text-scrollable {
     max-height: 15rem;
     overflow-y: auto;
