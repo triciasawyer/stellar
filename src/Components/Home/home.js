@@ -5,8 +5,9 @@ import axios from 'axios';
 const Home = () => {
   const [recMovies, setRecMovies] = useState([]);
   const [popMovies, setPopMovies] = useState([]);
-  // const [popSeries, setPopSeries] = useState([]);
-  const [series, setSeries] = useState([]);
+  // trying to get popular series
+  const [popSeries, setPopSeries] = useState([]);
+  // const [series, setSeries] = useState([]);
   const [actors, setActors] = useState([]);
 
   useEffect(() => {
@@ -19,11 +20,8 @@ const Home = () => {
         const popMovieRes = await axios.get('http://localhost:3002/movies?category=popular');
         setPopMovies(popMovieRes.data);
 
-        // const popSeriesRes = await axios.get('https://api.themoviedb.org/3/tv/popular?api_key=YOUR_TMDB_API_KEY&language=en-US&page=1');
-        // setPopSeries(popSeriesRes.data.results);
-
-        const seriesRes = await axios.get('http://localhost:3002/series');
-        setSeries(seriesRes.data);
+        const popSeriesRes = await axios.get('http://localhost:3002/series?category=popular');
+        setPopSeries(popSeriesRes.data);
 
         const actorsRes = await axios.get('http://localhost:3002/trending-actors');
         setActors(actorsRes.data);
@@ -45,8 +43,10 @@ const Home = () => {
     return `${month}-${day}-${year}`;
   }
 
+
   return (
     <div className="home">
+
       {/* Creating a row for trending series and movies together */}
 
       {/* <section className="mixed-section">
@@ -149,7 +149,7 @@ const Home = () => {
         <div className="container">
           <h2 style={{ fontSize: '20px', fontWeight: '200', marginLeft: '25px' }}>TV Shows</h2>
           <div className="row flex-nowrap overflow-auto">
-            {series.map((series, index) => (
+            {popSeries.map((series, index) => (
               <div key={index} className='col-md-2 mb-4'>
                 <div className='card' style={{ width: '100%' }}>
                   <img

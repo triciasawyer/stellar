@@ -19,9 +19,11 @@ const Header = () => {
             <li><Link to="/series">Series</Link></li>
             <li><Link to="/movies">Movies</Link></li>
             <li><Link to="/kids">Kids</Link></li>
-            <div className="search-icon" onClick={toggleSearch}>
-              <FaSearch />
-            </div>
+            <Link to="/search">
+              <div className="search-icon" onClick={toggleSearch}>
+                <FaSearch />
+              </div>
+            </Link>
             <li className='myacc'><Link to="/profile">My Account</Link></li>
           </nav>
         </div>
