@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const SearchPage = () => {
     const [searchQuery, setSearchQuery] = useState('');
-    const [filterOptions, setFilterOptions] = useState({ category: '', released: '' });
+    // const [filterOptions, setFilterOptions] = useState({ category: '', released: '' });
     const [searchResults, setSearchResults] = useState([]);
 
     const handleSearch = async () => {
