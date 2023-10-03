@@ -100,25 +100,27 @@ const Home = () => {
   </div>
 </section> */}
 
-      <section className="nowplay-topsection">
+      <section className="nowplaying-topsection">
         <div className="container">
-          <h2 className="top-title">Recent drops</h2>
+          {/* <h2 className="top-title">Recent drops</h2> */}
           <div className="row">
             {recMovies2.length > 0 ? (
               <div className="col-3">
-                <div className="card" style={{ width: '100%' }}>
-                  <img
-                    className="card-img-top"
-                    src={recMovies2[0].imageUrl}
-                    alt={recMovies2[0].title}
-                  />
-                  <div className="card-details">
+                <div style={{ width: '100%' }}>
+                <Link to={`/movie/${recMovies2[0].id}`}>
+                    <img
+                      className="card-img-top"
+                      src={recMovies2[0].imageUrl}
+                      alt={recMovies2[0].title}
+                    />
+                  </Link>
+                  {/* <div className="card-details">
                     <h5 className="card-title">{recMovies2[0].title}</h5>
                     <div className="card-text-scrollable">
                       <p className="card-text">{recMovies2[0].overview}</p>
                     </div>
                     <p className="card-text">{formatReleaseDate(recMovies2[0].releasedOn)}</p>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             ) : (
@@ -137,11 +139,13 @@ const Home = () => {
             {recMovies.map((movie, index) => (
               <div key={index} className='col-md-2 mb-2'>
                 <div className='card' style={{ width: '100%' }}>
+                {/* <Link to={`/movie/${recMovies2[0].id}`}> */}
                   <img
                     className="card-img-top"
                     src={movie.imageUrl}
                     alt={movie.title}
                   />
+                  {/* </Link> */}
                   <div className='card-details'>
                     <h5 className="card-title">{movie.title}</h5>
                     <div className="card-text-scrollable">
