@@ -3,6 +3,7 @@ import axios from 'axios';
 
 const Kids = () => {
     const [kids, setKids] = useState([]);
+    // Get rid of this
     const [searchQuery, setSearchQuery] = useState('');
 
     const fetchKids = useCallback(async () => {
@@ -29,7 +30,7 @@ const Kids = () => {
 
     return (
         <>
-            <div className="search-bar d-flex justify-content-center mb-3">
+            {/* <div className="search-bar d-flex justify-content-center mb-3">
                 <input
                     type="text"
                     placeholder="Search kids..."
@@ -40,7 +41,7 @@ const Kids = () => {
                 <button className="search-btn" onClick={fetchKids}>
                     Search
                 </button>
-            </div>
+            </div> */}
             <div className="container">
                 <div className="row">
                     {kids.map((kid, index) => (

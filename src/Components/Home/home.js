@@ -5,12 +5,12 @@ import axios from 'axios';
 
 const Home = () => {
   const [recMovies, setRecMovies] = useState([]);
+  const [recMovies2, setRecMovies2] = useState([]);
   const [popMovies, setPopMovies] = useState([]);
   // trying to get popular series
   const [popSeries, setPopSeries] = useState([]);
   // const [series, setSeries] = useState([]);
   const [actors, setActors] = useState([]);
-  // const [isBelowTitle, setIsBelowTitle] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -18,6 +18,9 @@ const Home = () => {
         // Fetching
         const recentMovieRes = await axios.get('http://localhost:3002/movies?category=playing');
         setRecMovies(recentMovieRes.data);
+
+        const recentMovieRes2 = await axios.get('http://localhost:3002/movies?category=playing2');
+        setRecMovies2(recentMovieRes2.data);
 
         const popMovieRes = await axios.get('http://localhost:3002/movies?category=popular');
         setPopMovies(popMovieRes.data);
@@ -27,6 +30,7 @@ const Home = () => {
 
         const actorsRes = await axios.get('http://localhost:3002/trending-actors');
         setActors(actorsRes.data);
+
       } catch (err) {
         console.error('Error fetching data:', err);
       }
@@ -34,32 +38,6 @@ const Home = () => {
 
     fetchData();
   }, []);
-
-
-  // // Scrolling affect to movie 
-  // const handleScroll = () => {
-  //   // Function to handle scrolling and apply the class when below title
-  //   const titleElements = document.querySelectorAll('.h2-title');
-  //   const scrollPosition = window.scrollY;
-
-  //   titleElements.forEach((titleElement) => {
-  //     const titlePosition = titleElement.getBoundingClientRect().top + window.scrollY;
-  //     if (scrollPosition > titlePosition) {
-  //       setIsBelowTitle(true);
-  //     } else {
-  //       setIsBelowTitle(false);
-  //     }
-  //   });
-  // };
-
-  // useEffect(() => {
-  //   // Add a scroll event listener to handle scrolling
-  //   window.addEventListener('scroll', handleScroll);
-  //   return () => {
-  //     // Remove the event listener when the component unmounts
-  //     window.removeEventListener('scroll', handleScroll);
-  //   };
-  // }, []);
 
 
   function formatReleaseDate(releaseDate) {
@@ -122,19 +100,42 @@ const Home = () => {
   </div>
 </section> */}
 
-      <section className="popular-movies-section">
+      <section className="nowplay-topsection">
         <div className="container">
-          <h2 className='h2-title'>Trending Movies</h2>
-          <div className="row flex-nowrap overflow-auto">
-            {popMovies.map((movie, index) => (
+          <h2 className="top-title">Recent drops</h2>
+          <div className="row">
+            {recMovies2.length > 0 ? (
+              <div className="col-3">
+                <div className="card" style={{ width: '100%' }}>
+                  <img
+                    className="card-img-top"
+                    src={recMovies2[0].imageUrl}
+                    alt={recMovies2[0].title}
+                  />
+                  <div className="card-details">
+                    <h5 className="card-title">{recMovies2[0].title}</h5>
+                    <div className="card-text-scrollable">
+                      <p className="card-text">{recMovies2[0].overview}</p>
+                    </div>
+                    <p className="card-text">{formatReleaseDate(recMovies2[0].releasedOn)}</p>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="col-3">
+                <p>No recent movies available.</p>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
 
-              // Old one, trying to enlarge movie when scrolling
-              <div key={index} className='col-md-2 mb-4'>
-                {/* <div
-                key={index}
-                className={`col-md-2 mb-4 ${isBelowTitle ? 'enlarge-card' : ''}`}
-              > */}
-              
+      <section className="recent-movies-section">
+        <div className="container">
+          <h2 className='h2-title'>Now Playing</h2>
+          <div className="row flex-nowrap overflow-auto">
+            {recMovies.map((movie, index) => (
+              <div key={index} className='col-md-2 mb-2'>
                 <div className='card' style={{ width: '100%' }}>
                   <img
                     className="card-img-top"
@@ -155,19 +156,12 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="recent-movies-section">
+      <section className="popular-movies-section">
         <div className="container">
-          <h2 className='h2-title'>Now Playing</h2>
+          <h2 className='h2-title'>Trending Movies</h2>
           <div className="row flex-nowrap overflow-auto">
-            {recMovies.map((movie, index) => (
-
-              // Old one, trying to enlarge movie when scrolling
-              <div key={index} className='col-md-2 mb-4'>
-                {/* <div
-                key={index}
-                className={`col-md-2 mb-4 ${isBelowTitle ? 'enlarge-card' : ''}`}
-              > */}
-
+            {popMovies.map((movie, index) => (
+              <div key={index} className='col-md-2 mb-2'>
                 <div className='card' style={{ width: '100%' }}>
                   <img
                     className="card-img-top"
@@ -193,14 +187,7 @@ const Home = () => {
           <h2 className='h2-title'>TV Shows</h2>
           <div className="row flex-nowrap overflow-auto">
             {popSeries.map((series, index) => (
-
-              // Old one, trying to enlarge movie when scrolling
-              <div key={index} className='col-md-2 mb-4'>
-                {/* <div
-              key={index}
-              className={`col-md-2 mb-4 ${isBelowTitle ? 'enlarge-card' : ''}`}
-              > */}
-
+              <div key={index} className='col-md-2 mb-2'>
                 <div className='card' style={{ width: '100%' }}>
                   <img
                     className="card-img-top"
@@ -226,14 +213,7 @@ const Home = () => {
           <h2 className='h2-title'>Trending Actors</h2>
           <div className="row flex-nowrap overflow-auto">
             {actors.map((actor, index) => (
-
-              // Old one, trying to enlarge movie when scrolling
-              <div key={index} className='col-md-2 mb-4'>
-                {/* <div
-                key={index}
-                className={`col-md-2 mb-4 ${isBelowTitle ? 'enlarge-card' : ''}`}
-              > */}
-
+              <div key={index} className='col-md-2 mb-2'>
                 <Link to={`/actor/${actor.id}`} className="actor-link">
                   <div className='card' style={{ width: '100%' }}>
                     {actor.profileImageUrl ? (

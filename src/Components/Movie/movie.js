@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Movie = () => {
     const [movies, setMovies] = useState([]);
+    // Get rid of searchQuery and move to overall
     const [searchQuery, setSearchQuery] = useState('');
 
     const fetchMovies = useCallback(async () => {
@@ -29,7 +30,7 @@ const Movie = () => {
 
     return (
         <>
-            <div className="search-bar d-flex justify-content-center mb-3">
+            {/* <div className="search-bar d-flex justify-content-center mb-3">
                 <input
                     type="text"
                     placeholder="Search movies..."
@@ -40,7 +41,7 @@ const Movie = () => {
                 <button className="search-btn" onClick={fetchMovies}>
                     Search
                 </button>
-            </div>
+            </div> */}
             <div className="container">
                 <div className="row">
                     {movies.map((movie, index) => (

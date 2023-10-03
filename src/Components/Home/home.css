@@ -2,17 +2,10 @@
     font-size: 20px;
     font-weight: 200;
     margin-left: 25px;
-    /* background-color: rgb(123, 123, 123); */
     color: rgb(245, 245, 245);
 }
 
-/* Scrolling behavior */
-
-.enlarge-card {
-    transform: scale(1); /* Initial scale */
-    transition: transform 0.3s ease-in-out; /* Transition effect */
-  }
-  
-  .enlarge-card:hover {
-    transform: scale(1.1); /* Enlarged scale on hover */
-  }
+.topmovie-section {
+  background-color: #f5f5f5;
+  padding: 20px 0;
+}
