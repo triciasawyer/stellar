@@ -8,6 +8,8 @@ I wanted to create a streaming service, similar to netflix or hulu, where users 
 
 ### Deployment
 
+[Backend Repository](https://github.com/triciasawyer/stellar-BE)
+
 ### UML
 
 ![UML](./assets/Stellar-uml-1.png)
