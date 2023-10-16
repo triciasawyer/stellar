@@ -3,6 +3,7 @@ import axios from 'axios';
 
 const Series = () => {
     const [series, setSeries] = useState([]);
+    // Get rid of this
     const [searchQuery, setSearchQuery] = useState('');
 
     const fetchSeries = useCallback(async () => {
@@ -27,7 +28,7 @@ const Series = () => {
 
     return (
         <>
-            <div className="search-bar d-flex justify-content-center mb-3">
+            {/* <div className="search-bar d-flex justify-content-center mb-3">
                 <input
                     type="text"
                     placeholder="Search series..."
@@ -38,7 +39,7 @@ const Series = () => {
                 <button className="search-btn" onClick={fetchSeries}>
                     Search
                 </button>
-            </div>
+            </div> */}
             <div className="container">
                 <div className="row">
                     {series.map((series, index) => (

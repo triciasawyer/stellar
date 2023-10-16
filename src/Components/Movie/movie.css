@@ -1,4 +1,4 @@
-.search-input {
+/* .search-input {
     border: none;
     border-bottom: 1px solid rgb(57, 56, 56);
     padding: 10px;
@@ -7,16 +7,20 @@
     color: rgb(57, 56, 56);
     font-size: 15px;
     outline: none;
-  }
+  } */
   
-  .search-btn {
+  /* .search-btn {
     background-color: transparent;
     color: rgb(57, 56, 56);
     border: none;
     cursor: pointer;
     font-size: 15px;
-  }
+  } */
   
+  .container {
+    margin-top: 3rem;
+  }
+
   .card {
     position: relative;
     overflow: hidden;

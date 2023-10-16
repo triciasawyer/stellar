@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import './home.css';
 import axios from 'axios';
 
 const Home = () => {
   const [recMovies, setRecMovies] = useState([]);
+  const [recMovies2, setRecMovies2] = useState([]);
   const [popMovies, setPopMovies] = useState([]);
-  // const [popSeries, setPopSeries] = useState([]);
-  const [series, setSeries] = useState([]);
+  // trying to get popular series
+  const [popSeries, setPopSeries] = useState([]);
+  // const [series, setSeries] = useState([]);
   const [actors, setActors] = useState([]);
 
   useEffect(() => {
@@ -16,17 +19,18 @@ const Home = () => {
         const recentMovieRes = await axios.get('http://localhost:3002/movies?category=playing');
         setRecMovies(recentMovieRes.data);
 
+        const recentMovieRes2 = await axios.get('http://localhost:3002/movies?category=playing2');
+        setRecMovies2(recentMovieRes2.data);
+
         const popMovieRes = await axios.get('http://localhost:3002/movies?category=popular');
         setPopMovies(popMovieRes.data);
 
-        // const popSeriesRes = await axios.get('https://api.themoviedb.org/3/tv/popular?api_key=YOUR_TMDB_API_KEY&language=en-US&page=1');
-        // setPopSeries(popSeriesRes.data.results);
-
-        const seriesRes = await axios.get('http://localhost:3002/series');
-        setSeries(seriesRes.data);
+        const popSeriesRes = await axios.get('http://localhost:3002/series?category=popular');
+        setPopSeries(popSeriesRes.data);
 
         const actorsRes = await axios.get('http://localhost:3002/trending-actors');
         setActors(actorsRes.data);
+
       } catch (err) {
         console.error('Error fetching data:', err);
       }
@@ -34,6 +38,7 @@ const Home = () => {
 
     fetchData();
   }, []);
+
 
   function formatReleaseDate(releaseDate) {
     if (!releaseDate) return "N/A";
@@ -45,13 +50,15 @@ const Home = () => {
     return `${month}-${day}-${year}`;
   }
 
+
   return (
     <div className="home">
+
       {/* Creating a row for trending series and movies together */}
 
       {/* <section className="mixed-section">
   <div className="container">
-    <h2 style={{ fontSize: '25px' }}>Popular Movies & TV Shows</h2>
+    <h2 className='h2-title'>Popular Movies & TV Shows</h2>
     <div className="row flex-nowrap overflow-auto">
       {popMovies.map((movie, index) => (
         <div key={index} className='col-md-2 mb-4'>
@@ -93,18 +100,52 @@ const Home = () => {
   </div>
 </section> */}
 
-      <section className="popular-movies-section">
+      <section className="nowplaying-topsection">
         <div className="container">
-          <h2 style={{ fontSize: '20px', fontWeight: '200', marginLeft: '25px' }}>Trending Movies</h2>
+          {/* <h2 className="top-title">Recent drops</h2> */}
+          <div className="row">
+            {recMovies2.length > 0 ? (
+              <div className="col-3">
+                <div style={{ width: '100%' }}>
+                <Link to={`/movie/${recMovies2[0].id}`}>
+                    <img
+                      className="card-img-top"
+                      src={recMovies2[0].imageUrl}
+                      alt={recMovies2[0].title}
+                    />
+                  </Link>
+                  {/* <div className="card-details">
+                    <h5 className="card-title">{recMovies2[0].title}</h5>
+                    <div className="card-text-scrollable">
+                      <p className="card-text">{recMovies2[0].overview}</p>
+                    </div>
+                    <p className="card-text">{formatReleaseDate(recMovies2[0].releasedOn)}</p>
+                  </div> */}
+                </div>
+              </div>
+            ) : (
+              <div className="col-3">
+                <p>No recent movies available.</p>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      <section className="recent-movies-section">
+        <div className="container">
+          <h2 className='h2-title'>Now Playing</h2>
           <div className="row flex-nowrap overflow-auto">
-            {popMovies.map((movie, index) => (
-              <div key={index} className='col-md-2 mb-4'>
+            {recMovies.map((movie, index) => (
+              <div key={index} className='col-md-2 mb-2'>
                 <div className='card' style={{ width: '100%' }}>
+                {/* <Link to={`/movie/${recMovies2[0].id}`}> */}
                   <img
                     className="card-img-top"
                     src={movie.imageUrl}
                     alt={movie.title}
                   />
+                  {/* </Link> */}
                   <div className='card-details'>
                     <h5 className="card-title">{movie.title}</h5>
                     <div className="card-text-scrollable">
@@ -119,12 +160,12 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="recent-movies-section">
+      <section className="popular-movies-section">
         <div className="container">
-          <h2 style={{ fontSize: '20px', fontWeight: '200', marginLeft: '25px' }}>Now Playing</h2>
+          <h2 className='h2-title'>Trending Movies</h2>
           <div className="row flex-nowrap overflow-auto">
-            {recMovies.map((movie, index) => (
-              <div key={index} className='col-md-2 mb-4'>
+            {popMovies.map((movie, index) => (
+              <div key={index} className='col-md-2 mb-2'>
                 <div className='card' style={{ width: '100%' }}>
                   <img
                     className="card-img-top"
@@ -147,10 +188,10 @@ const Home = () => {
 
       <section className="series-section">
         <div className="container">
-          <h2 style={{ fontSize: '20px', fontWeight: '200', marginLeft: '25px' }}>TV Shows</h2>
+          <h2 className='h2-title'>TV Shows</h2>
           <div className="row flex-nowrap overflow-auto">
-            {series.map((series, index) => (
-              <div key={index} className='col-md-2 mb-4'>
+            {popSeries.map((series, index) => (
+              <div key={index} className='col-md-2 mb-2'>
                 <div className='card' style={{ width: '100%' }}>
                   <img
                     className="card-img-top"
@@ -173,10 +214,10 @@ const Home = () => {
 
       <section className="actors-section">
         <div className="container">
-          <h2 style={{ fontSize: '20px', fontWeight: '200', marginLeft: '25px' }}>Trending Actors</h2>
+          <h2 className='h2-title'>Trending Actors</h2>
           <div className="row flex-nowrap overflow-auto">
             {actors.map((actor, index) => (
-              <div key={index} className='col-md-2 mb-4'>
+              <div key={index} className='col-md-2 mb-2'>
                 <Link to={`/actor/${actor.id}`} className="actor-link">
                   <div className='card' style={{ width: '100%' }}>
                     {actor.profileImageUrl ? (
